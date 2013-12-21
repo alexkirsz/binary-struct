@@ -1,9 +1,9 @@
 fs = require 'fs'
 OffsetBuffer = require 'offset-buffer'
 
-module.exports = (methods, args) ->
+module.exports = create = (methods, args) ->
   struct = ->
-    exports.createType methods, arguments
+    create methods, arguments
 
   struct.read = (buffer) ->
     read = (subType) -> subType.read buffer
