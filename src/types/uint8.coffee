@@ -1,6 +1,4 @@
-type = require '../type'
-
-module.exports = type
+module.exports =
   read: (buffer) ->
     value = buffer.buf[buffer.read_offset]
     buffer.read_offset++

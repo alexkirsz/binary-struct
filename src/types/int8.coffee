@@ -1,6 +1,4 @@
-type = require '../type'
-
-module.exports = type
+module.exports =
   read: (buffer) ->
     return buffer.readInt8()
   write: (buffer, value) ->
