@@ -1,7 +1,9 @@
-module.exports = require './struct'
+struct = require './struct'
 
-exports.OffsetBuffer = require 'offset-buffer'
-exports.string = require './struct/string'
-exports.buffer = require './struct/buffer'
-exports.le = require './types/numerics-le'
-exports.be = require './types/numerics-be'
+struct.OffsetBuffer = require 'offset-buffer'
+struct.string = require './struct/string'
+struct.buffer = require './struct/buffer'
+struct.le = require './types/numerics-le'
+struct.be = require './types/numerics-be'
+
+module.exports = struct
