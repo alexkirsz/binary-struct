@@ -24,6 +24,7 @@ module.exports = create = (methods, args) ->
       skip = (subType) -> subType.skip buffer
       move = (n) -> buffer.read_offset += n
       methods.skip.apply { buffer, read, skip, move }, args
+    else struct.read
 
   struct.size = methods.size
 
