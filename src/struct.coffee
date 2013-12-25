@@ -1,20 +1,18 @@
 fs = require 'fs'
 OffsetBuffer = require 'offset-buffer'
 
-module.exports = create = (methods, args) ->
+module.exports = create = (ctor, args) ->
+  methods = {}
+  ctor.apply methods, args
+
   struct = ->
-    create methods, arguments
+    create ctor, arguments
 
   struct.read = (buffer) ->
     read = (subType) -> subType.read buffer
     skip = (subType) -> subType.skip buffer
     move = (n) -> buffer.read_offset += n
-    return methods.read.apply { buffer, read, skip, move }, args
-
-  struct.write = (buffer, value) ->
-    write = (subType, subValue) -> subType.write buffer, subValue
-    move = (n) -> buffer.write_offset += n
-    return methods.write.call { buffer, write, move }, value
+    return methods.read.apply { buffer, read, skip, move }
 
   struct.skip =
     if methods.size then (buffer) ->
@@ -23,8 +21,13 @@ module.exports = create = (methods, args) ->
       read = (subType) -> subType.read buffer
       skip = (subType) -> subType.skip buffer
       move = (n) -> buffer.read_offset += n
-      methods.skip.apply { buffer, read, skip, move }, args
+      methods.skip.apply { buffer, read, skip, move }
     else struct.read
+
+  struct.write = (buffer, value) ->
+    write = (subType, subValue) -> subType.write buffer, subValue
+    move = (n) -> buffer.write_offset += n
+    return methods.write.call { buffer, write, move }, value
 
   struct.size = methods.size
 
