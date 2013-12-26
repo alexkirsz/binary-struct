@@ -41,4 +41,8 @@ module.exports = create = (ctor, args) ->
     buffer = new OffsetBuffer buf
     return struct.read buffer
 
+  struct.toBuffer = (val, len = 1024 * 1024) ->
+    buffer = new OffsetBuffer len
+    return struct.write buffer, val
+
   return struct
