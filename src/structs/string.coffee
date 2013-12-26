@@ -9,5 +9,5 @@ module.exports = struct (length, encoding) ->
     @buffer.read_offset += Buffer.byteLength value, encoding
     return value
   @write = (value) ->
-    @buffer.buf.write value, encoding
+    @buffer.buf.write value, @buffer.write_offset, encoding
     @buffer.write_offset += Buffer.byteLength value, encoding
