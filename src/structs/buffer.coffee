@@ -6,7 +6,7 @@ module.exports = struct (length) ->
     @buffer.read_offset += length
     return value
   @write = (value) ->
-    value.copy @buffer.buf.write, @buffer.write_offset
+    value.copy @buffer.buf, @buffer.write_offset
     @buffer.write_offset += value.length
   @skip = ->
     @buffer.read_offset += length
