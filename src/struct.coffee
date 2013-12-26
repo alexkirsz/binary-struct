@@ -27,7 +27,9 @@ module.exports = create = (ctor, args) ->
   struct.write = (buffer, value) ->
     write = (subType, subValue) -> subType.write buffer, subValue
     move = (n) -> buffer.write_offset += n
-    return methods.write.call { buffer, write, move }, value
+    startOffset = buffer.write_offset
+    methods.write.call { buffer, write, move }, value
+    return buffer.write_offset - startOffset
 
   struct.size = methods.size
 
